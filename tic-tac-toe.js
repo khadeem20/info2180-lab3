@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
     var currentVal = "";
     var alt= "";
-    const state = ['','','',
-                   '','','',         
-                   '','',''];
+    const state = [
+        "", "", "",
+        "", "", "",
+        "", "", ""
+    ];
     
     var original= "";
 
@@ -38,16 +40,80 @@ document.addEventListener("DOMContentLoaded", function(){
         );
     
         //exercise 3
-    square.addEventListener("mouseenter", function(){
-        square.classList.add("hover");
+        square.addEventListener("mouseenter", function(){
+            square.classList.add("hover");
 
-    });
+        });
 
-    square.addEventListener("mouseleave", function(){
-        square.classList.remove("hover");
-    });
-    
+        square.addEventListener("mouseleave", function(){
+            square.classList.remove("hover");
+        });
 
         
+
     });
-});
+    
+     // exercise 4
+     var status = document.getElementById("state").classList.add("you-won");
+     // Function to check for a winner
+     function checkWinner() {
+         const players = ["X", "O"];
+
+         for (let player of players) {
+             // Check rows
+             for (let i = 0; i < 3; i++) {
+                 if (state[i * 3] === player && state[i * 3 + 1] === player && state[i * 3 + 2] === player) {
+                     return player; // Three in a row in a row
+                 }
+             }
+
+             // Check columns
+             for (let j = 0; j < 3; j++) {
+                 if (state[j] === player && state[j + 3] === player && state[j + 6] === player) {
+                     return player; // Three in a row in a column
+                 }
+             }
+
+             // Check diagonals
+             if ((state[0] === player && state[4] === player && state[8] === player) ||
+                 (state[2] === player && state[4] === player && state[6] === player)) {
+                 return player; // Three in a row in a diagonal
+             }
+         }
+
+         return null; // No winner found
+     }
+  
+     var winner = checkWinner();
+
+     if (winner !== null){
+         status.textContent = "Congratulations! " + winner + "is the Winner!";
+     }
+
+    var button = document.getElementsByClassName("btn").querySelectorAll("div");
+    button.addEventListener("click", function() {
+        status.classList.remove("you-won");
+
+        squares.forEach(function(square) {
+            if (square.classList.contains("X")) {
+                square.classList.remove("X");
+                square.textContent = "";
+            }
+
+            if (square.classList.contains("O")) {
+                square.classList.remove("O");
+                square.textContent = "";
+            }
+            state = ["", "", "", "", "", "", "", "", ""]; // Reset the state array
+            currentVal = "X"; // Reset the current player to "X"
+       
+
+        })
+
+    })
+
+        
+
+
+})
+
