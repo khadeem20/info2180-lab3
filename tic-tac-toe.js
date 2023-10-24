@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function(){
     const state = ['','','',
                    '','','',         
                    '','',''];
+    
+    var original= "";
+
     squares.forEach(function(square, index) {
         square.addEventListener('click', function() {
             if (!square.classList.contains("X") && !square.classList.contains("O")) {
@@ -33,5 +36,18 @@ document.addEventListener("DOMContentLoaded", function(){
 
             }
         );
+    
+        //exercise 3
+    square.addEventListener("mouseenter", function(){
+        square.classList.add("hover");
+
+    });
+
+    square.addEventListener("mouseleave", function(){
+        square.classList.remove("hover");
+    });
+    
+
+        
     });
 });
